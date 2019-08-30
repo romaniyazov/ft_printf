@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/30 14:41:49 by adavis           ###   ########.fr       */
+/*   Updated: 2019/08/30 15:13:58 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_params
 }				t_params;
 
 void			parse_spec(char **fmt, va_list ap);
-void			ft_printf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 void			print_d(int d, t_params params);
 void			print_xo(int nbr, int base, t_bool upper, t_bool alternate);
 
