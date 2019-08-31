@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 15:14:33 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/31 21:48:59 by adavis           ###   ########.fr       */
+/*   Created: 2019/08/31 20:20:03 by adavis            #+#    #+#             */
+/*   Updated: 2019/08/31 21:07:18 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int		main(void)
+int		parse(char **fmt, va_list ap, t_params *params)
 {
-	char str[] = "Abc%-10ddef\n";
+	int		len;
 
-	ft_printf(str, -12);
-	printf(str, -12);
+	len = 0;
+	set_flags(fmt, params);
+	if (**fmt == 'd')
+		d_render(va_arg(ap, int), params);
+	return (len);
 }

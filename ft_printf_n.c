@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 15:14:33 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/31 21:48:59 by adavis           ###   ########.fr       */
+/*   Created: 2019/08/31 19:59:48 by adavis            #+#    #+#             */
+/*   Updated: 2019/08/31 21:01:28 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int		main(void)
+int		ft_printf(const char *format, ...)
 {
-	char str[] = "Abc%-10ddef\n";
+	va_list		ap;
+	t_params	params;
+	char		*fmt;
 
-	ft_printf(str, -12);
-	printf(str, -12);
+	va_start(ap, format);
+	fmt = ft_strdup(format);
+	while (*fmt)
+	{
+		if (*fmt == '%')
+			parse(&fmt, ap, &params);
+		else
+			ft_putchar(*fmt);
+		fmt++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:57 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/30 18:24:09 by adavis           ###   ########.fr       */
+/*   Updated: 2019/08/31 19:25:16 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,100 +16,81 @@
 void	init_params(t_params *params)
 {
 	params->alternate = false;
-	params->width_zeros = false;
-	params->width_spaces = false;
 	params->left = false;
 	params->sign = false;
 	params->space = false;
-	params->width_val = 0;
+	params->prec = false;
+	params->zeros = false;
+	params->width = 0;
+	params->precision = 6;
 }
 
-int		add_flag(char *flag, t_params *params)
+int		get_width(char *str)
 {
-	int		cnt;
-	int		val;
-	int		ret_cnt;
+	int		len;
 
-	ret_cnt = 1;
-	if (*flag >= '0' && *flag <= '9')
+	while (*str < '1' || *str > '9')
 	{
-		params->width_spaces = true;
-		cnt = 0;
-		val = 0;
-		while (*flag >= '0' && *flag <= '9')
-		{
-			val *= 10;
-			val += *flag - '0';
-			cnt++;
-			flag++;
-		}
-		ret_cnt += cnt;
+		if (strchr(CONVERSIONS, *str) || strchr(MODIFIERS, *str) || *str == '.')
+			return (0);
+		str++;
 	}
-	if (*flag == '#')
-		params->alternate = true;
-	if (*flag == '0')
+	len = 0;
+	while (*str >= '0' && *str <= '9')
 	{
-		params->width_zeros = true;
-		cnt = 0;
-		val = 0;
-		while (*flag >= '0' && *flag <= '9')
-		{
-			val *= 10;
-			val += *flag - '0';
-			cnt++;
-			flag++;
-		}
-		ret_cnt += cnt;
-		params->width_val = val;
-		return (ret_cnt);
+		len = len * 10 + (*str - '0');
+		str++;
 	}
-	if (*flag == '-')
-		params->left = true;
-	if (*flag == '+')
-		params->sign = true;
-	if (*flag == ' ')
+	return (len);
+}
+
+int		get_precision(char *str)
+{
+	int		len;
+
+	while (!(*str == '.'))
 	{
-		params->width_spaces = true;
-		cnt = 0;
-		val = 0;
-		flag++;
-		while (*flag >= '0' && *flag <= '9')
-		{
-			val *= 10;
-			val += *flag - '0';
-			cnt++;
-			flag++;
-		}
-		if (cnt)
-		{
-			ret_cnt += cnt;
-			params->width_val += val;
-			return (ret_cnt + 1);
-		}
-		else
-			params->width_val += 1;
+		if (strchr(CONVERSIONS, *str) || strchr(MODIFIERS, *str))
+			return (6);
+		str++;
 	}
-	if (*flag >= '0' && *flag <= '9')
+	str++;
+	if (*str == '0')
+		return (0);
+	len = 0;
+	while (*str >= '0' && *str <= '9')
 	{
-		params->width_spaces = true;
-		cnt = 0;
-		val = 0;
-		while (*flag >= '0' && *flag <= '9')
-		{
-			val *= 10;
-			val += *flag - '0';
-			cnt++;
-			flag++;
-		}
-		if (cnt)
-		{
-			params->width_val = val;
-			return (ret_cnt + cnt + 1);
-		}
-		else
-			params->width_val = 1;
+		len = len * 10 + (*str - '0');
+		str++;
 	}
-	return (ret_cnt);
+	return (len);
+}
+
+char	*set_flags(char *str, t_params *params)
+{
+	params->width = get_width(str);
+	params->precision = get_precision(str);
+	while (!strchr(CONVERSIONS, *str) || !strchr(MODIFIERS, *str))
+	{
+		if (*str == '-')
+			params->left = true;
+		if (*str == '+')
+			params->sign = true;
+		if (*str == ' ')
+			params->width = params->width || 1;
+		if (*str == '#')
+			params->alternate = true;
+		if (*str == '0')
+			params->zeros = true;
+		str++;
+	}
+	printf("width: %d\n", params->width);
+	printf("precision: %d\n", params->precision);
+	printf("left: %d\n", params->left);
+	printf("sign: %d\n", params->sign);
+	printf("alternate: %d\n", params->alternate);
+	printf("zeros: %d\n", params->zeros);
+	return (str);
 }
 
 void	conv_method(char conv, va_list ap, t_params params)
@@ -135,10 +116,7 @@ void	parse_spec(char **fmt, va_list ap)
 
 	init_params(&params);
 	cnt = 1;
-	while (ft_strchr(FLAGS, *(*fmt + cnt)))
-	{
-		cnt += add_flag((*fmt + cnt), &params);
-	}
+	*fmt = set_flags(*fmt, &params);
 	while (ft_strchr(MODIFIERS, *(*fmt + cnt)))
 	{
 		ft_printf("Modifier!");

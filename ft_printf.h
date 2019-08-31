@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/30 16:44:22 by adavis           ###   ########.fr       */
+/*   Updated: 2019/08/31 21:31:46 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ typedef struct	s_params
 	t_bool		sign;
 	t_bool		space;
 	t_bool		prec;
-	t_bool		width_zeros;
-	t_bool		width_spaces;
-	int			width_val;
-	int			prec_val;
+	t_bool		zeros;
+	int			width;
+	int			precision;
 }				t_params;
 
-void			parse_spec(char **fmt, va_list ap);
-int				ft_printf(const char *format, ...);
-void			print_d(int d, t_params params);
-void			print_xo(int nbr, int base, t_bool upper, t_params params);
+int		ft_printf(const char *format, ...);
+int		parse(char **fmt, va_list ap, t_params *params);
+void	init_params(t_params *params);
+int		get_width(char *str);
+int		get_precision(char *str);
+void	set_flags(char **fmt, t_params *params);
+int		d_render(int d, t_params *params);
+int		nbrlen(int nbr);
 
 #endif

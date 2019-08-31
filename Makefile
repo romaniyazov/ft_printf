@@ -6,15 +6,17 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 13:37:06 by adavis            #+#    #+#              #
-#    Updated: 2019/08/30 15:15:13 by adavis           ###   ########.fr        #
+#    Updated: 2019/08/31 21:03:21 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	ft_printf
 FLAGS		=	-Llibft -lft #-Wall -Werror -Wextra
 SRC			=	main.c \
-				ft_printf.c \
-				print_d.c
+				ft_printf_n.c \
+				parse.c \
+				set_flags.c \
+				d_render.c
 OBJ			=	$(SRC:%.c=%.o)
 
 $(NAME):
