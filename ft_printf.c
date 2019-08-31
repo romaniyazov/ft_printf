@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:26:57 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/30 15:14:52 by adavis           ###   ########.fr       */
+/*   Updated: 2019/08/30 18:24:09 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,23 @@ int		add_flag(char *flag, t_params *params)
 {
 	int		cnt;
 	int		val;
+	int		ret_cnt;
 
+	ret_cnt = 1;
+	if (*flag >= '0' && *flag <= '9')
+	{
+		params->width_spaces = true;
+		cnt = 0;
+		val = 0;
+		while (*flag >= '0' && *flag <= '9')
+		{
+			val *= 10;
+			val += *flag - '0';
+			cnt++;
+			flag++;
+		}
+		ret_cnt += cnt;
+	}
 	if (*flag == '#')
 		params->alternate = true;
 	if (*flag == '0')
@@ -43,8 +59,9 @@ int		add_flag(char *flag, t_params *params)
 			cnt++;
 			flag++;
 		}
+		ret_cnt += cnt;
 		params->width_val = val;
-		return cnt;
+		return (ret_cnt);
 	}
 	if (*flag == '-')
 		params->left = true;
@@ -65,11 +82,12 @@ int		add_flag(char *flag, t_params *params)
 		}
 		if (cnt)
 		{
-			params->width_val = val;
-			return cnt + 1;
+			ret_cnt += cnt;
+			params->width_val += val;
+			return (ret_cnt + 1);
 		}
 		else
-			params->width_val = 1;
+			params->width_val += 1;
 	}
 	if (*flag >= '0' && *flag <= '9')
 	{
@@ -86,12 +104,12 @@ int		add_flag(char *flag, t_params *params)
 		if (cnt)
 		{
 			params->width_val = val;
-			return cnt + 1;
+			return (ret_cnt + cnt + 1);
 		}
 		else
 			params->width_val = 1;
 	}
-	return 1;
+	return (ret_cnt);
 }
 
 void	conv_method(char conv, va_list ap, t_params params)
@@ -105,9 +123,9 @@ void	conv_method(char conv, va_list ap, t_params params)
 	if (conv == 'd')
 		print_d(va_arg(ap, int), params);
 	if (conv == 'x' || conv == 'X')
-		print_xo(va_arg(ap, int), 16, conv == 'X', params.alternate);	
+		print_xo(va_arg(ap, int), 16, conv == 'X', params);
 	if (conv == 'o')
-		print_xo(va_arg(ap, int), 8, false, params.alternate);		
+		print_xo(va_arg(ap, int), 8, false, params);
 }
 
 void	parse_spec(char **fmt, va_list ap)
