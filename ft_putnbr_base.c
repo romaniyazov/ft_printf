@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_n.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/31 19:59:48 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/01 14:43:56 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/01 16:46:56 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/01 17:34:43 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "ft_printf.h"
-#include <stdio.h>
 
-int		ft_printf(const char *format, ...)
+void	ft_putnbr_base(unsigned int nbr, int base, t_bool upper)
 {
-	va_list		ap;
-	t_params	params;
-	char		*fmt;
-	int			len;
+	unsigned int	num2;
+	unsigned int	div;
 
-	len = 0;
-	va_start(ap, format);
-	fmt = ft_strdup(format);
-	while (*fmt)
+	num2 = nbr;
+	div = 1;
+	while (num2 > 9)
 	{
-		if (*fmt == '%')
-			len += parse(&fmt, ap, &params);
-		else
-		{
-			ft_putchar(*fmt);
-			len++;
-		}
-		fmt++;
+		div *= base;
+		num2 /= base;
 	}
-	return (len);
+	while (div > 0)
+	{
+		if (upper)
+			ft_putchar(BASE_CHARS_UPPER[nbr / div % base]);
+		else
+			ft_putchar(BASE_CHARS_LOWER[nbr / div % base]);
+		div /= base;
+	}
 }
