@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/31 21:31:46 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/01 17:35:01 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ int		get_width(char *str);
 int		get_precision(char *str);
 void	set_flags(char **fmt, t_params *params);
 int		d_render(int d, t_params *params);
-int		nbrlen(int nbr);
+int		c_render(char c, t_params *params);
+int		s_render(char *s, t_params *params);
+int		o_render(int d, t_params *params);
+int		x_render(int d, t_params *params, t_bool upper);
+void	ft_putnbr_base(unsigned int nbr, int base, t_bool upper);
 
 #endif
