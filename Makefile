@@ -6,7 +6,7 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 13:37:06 by adavis            #+#    #+#              #
-#    Updated: 2019/09/01 18:02:26 by adavis           ###   ########.fr        #
+#    Updated: 2019/09/01 20:13:07 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,12 @@ SRC			=	main.c \
 				s_render.c \
 				o_render.c \
 				x_render.c \
+				p_render.c \
 				ft_putnbr_base.c
 OBJ			=	$(SRC:%.c=%.o)
 
 $(NAME):
-	@gcc $(SRC) -o $(NAME) $(FLAGS) -c
+	@gcc $(SRC) -o $(NAME) $(FLAGS)
 
 all: $(NAME)
 

@@ -4,5 +4,7 @@
 
 int		main(void)
 {
-	printf("abc %03d def\n", 2121);
+	void	*ptr;
+
+	printf("abc%014pdef", ptr);
 }
