@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_render.c                                         :+:      :+:    :+:   */
+/*   ft_printf_n.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/01 16:13:21 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/02 21:31:41 by adavis           ###   ########.fr       */
+/*   Created: 2019/08/31 19:59:48 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/01 14:43:56 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int		s_render(char *s, t_params *params)
+int		ft_printf(const char *format, ...)
 {
-	int		len;
+	va_list		ap;
+	t_params	params;
+	char		*fmt;
+	int			len;
 
-	len = ((int)ft_strlen(s) > (int)params->width ? ft_strlen(s) : params->width);
-	if (params->left)
-		ft_putstr(s);
-	while ((int)(params->width--) - (int)ft_strlen(s) > 0)
-		ft_putchar(' ');
-	if (!params->left)
-		ft_putstr(s);
+	len = 0;
+	va_start(ap, format);
+	fmt = ft_strdup(format);
+	while (*fmt)
+	{
+		if (*fmt == '%')
+			len += parse(&fmt, ap, &params);
+		else
+		{
+			ft_putchar(*fmt);
+			len++;
+		}
+		fmt++;
+	}
 	return (len);
 }

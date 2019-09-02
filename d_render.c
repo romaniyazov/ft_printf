@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/01 14:17:51 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/02 18:13:47 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		d_nbrlen(int nbr)
 
 int		d_count_len(int d, t_params *params)
 {
-	int		len;
+	size_t	len;
 
 	len = d_nbrlen(d);
 	if (d < 0 || params->sign || params->space)

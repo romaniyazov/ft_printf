@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:12:24 by adavis            #+#    #+#             */
-/*   Updated: 2019/08/31 21:46:39 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/02 21:34:37 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	init_params(t_params *params)
 	params->zeros = false;
 	params->width = 0;
 	params->precision = 6;
+	params->l = false;
+	params->lll = false;
+	params->h = false;
 }
 
 int		get_width(char *str)
@@ -70,7 +73,8 @@ void	set_flags(char **fmt, t_params *params)
 	init_params(params);
 	params->width = get_width(*fmt);
 	params->precision = get_precision(*fmt);
-	while (!strchr(CONVERSIONS, **fmt) && !strchr(MODIFIERS, **fmt))
+
+	while (!strchr(CONVERSIONS, **fmt))
 	{
 		if (**fmt == '-')
 			params->left = true;
@@ -82,8 +86,14 @@ void	set_flags(char **fmt, t_params *params)
 			params->alternate = true;
 		if (**fmt == '0' && (*(*fmt - 1) > '9' || *(*fmt - 1) < '0'))
 			params->zeros = true;
+		if (**fmt == 'l')
+			params->l = (**fmt)++ == 'l' ? 2 : 1;
+		if (**fmt == 'L')
+			params->lll = true;
+		if (**fmt == 'h')
+			params->h = (**fmt)++ == 'h' ? 2 : 1;
 		(*fmt)++;
 	}
-	//printf("(%d %d %d %d %d %d)", params->width, params->precision, params->left, params->sign, params->alternate, params->zeros);
+	//printf("(%d %d %d)", params->l, params->h, params->lll);
 	//fflush(stdout);
 }

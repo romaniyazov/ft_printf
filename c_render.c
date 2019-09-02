@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 15:05:12 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/01 17:14:41 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/02 21:35:06 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int		c_render(char c, t_params *params)
 {
-	int		len;
+	size_t	len;
 
 	len = 1;
 	if (params->left)
 		ft_putchar(c);
 	params->width--;
-	while (params->width-- > 0)
+	while ((int)params->width-- > 0)
 	{
 		ft_putchar(' ');
 		len++;

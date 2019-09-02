@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/01 17:53:48 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/02 18:14:55 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		x_nbrlen(int nbr)
 	return (cnt);
 }
 
-int		x_count_len(int d, t_params *params)
+size_t	x_count_len(int d, t_params *params)
 {
-	int		len;
+	size_t	len;
 	int		tmp;
 
 	tmp = d;
@@ -76,7 +76,7 @@ void	x_render_right(int d, t_params *params, t_bool upper)
 
 int		x_render(int d, t_params *params, t_bool upper)
 {
-	int		len;
+	size_t	len;
 
 	len = x_count_len(d, params);
 	if (params->left)
