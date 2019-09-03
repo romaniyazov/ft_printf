@@ -6,13 +6,13 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/02 18:13:47 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 12:31:36 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		d_nbrlen(int nbr)
+size_t	d_nbrlen(long long nbr)
 {
 	int		cnt;
 
@@ -22,7 +22,7 @@ int		d_nbrlen(int nbr)
 	return (cnt);
 }
 
-int		d_count_len(int d, t_params *params)
+int		d_count_len(long long d, t_params *params)
 {
 	size_t	len;
 
@@ -34,7 +34,7 @@ int		d_count_len(int d, t_params *params)
 	return (len);
 }
 
-void	d_render_left(int d, t_params *params)
+void	d_render_left(long long d, t_params *params)
 {
 	if (d < 0)
 		params->width--;
@@ -46,14 +46,14 @@ void	d_render_left(int d, t_params *params)
 	if (params->width)
 	{
 		ft_putnbr(d);
-		while ((params->width--) - d_nbrlen(d) > 0)
+		while ((int)(params->width--) - (int)d_nbrlen(d) > 0)
 			ft_putchar(' ');
 	}
 	else
 		ft_putnbr(d);
 }
 
-void	d_render_right(int d, t_params *params)
+void	d_render_right(long long d, t_params *params)
 {
 	if (params->space && d >= 0 && !params->sign)
 		ft_putchar(' ');
@@ -65,13 +65,13 @@ void	d_render_right(int d, t_params *params)
 			ft_putchar('-');
 		else if (params->sign)
 			ft_putchar('+');
-		while ((params->width--) - d_nbrlen(d) - params->space > 0)
+		while ((int)(params->width--) - (int)d_nbrlen(d) - params->space > 0)
 			ft_putchar('0');
 		ft_putnbr(d >= 0 ? d : -d);
 	}
 	else
 	{
-		while ((params->width--) - d_nbrlen(d) - params->space > 0)
+		while ((int)(params->width--) - (int)d_nbrlen(d) - params->space > 0)
 			ft_putchar(' ');
 		if (params->sign && d >= 0)
 			ft_putchar('+');
@@ -79,7 +79,7 @@ void	d_render_right(int d, t_params *params)
 	}
 }
 
-int		d_render(int d, t_params *params)
+int		d_render(long long d, t_params *params)
 {
 	int		len;
 

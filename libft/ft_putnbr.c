@@ -6,18 +6,18 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:13:17 by adavis            #+#    #+#             */
-/*   Updated: 2018/12/12 16:34:28 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 12:32:04 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "libft.h"
 
-void	ft_putnbr(int n)
+void	ft_putnbr(long long n)
 {
-	unsigned int	num;
-	unsigned int	num2;
-	unsigned int	dvdr;
+	unsigned long long	num;
+	unsigned long long	num2;
+	unsigned long long	dvdr;
 
 	if (n < 0)
 	{

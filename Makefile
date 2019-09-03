@@ -6,7 +6,7 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/02 18:04:47 by adavis            #+#    #+#              #
-#    Updated: 2019/09/02 18:44:15 by adavis           ###   ########.fr        #
+#    Updated: 2019/09/03 12:12:40 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ =	$(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME):
-	@gcc $(SRCS) -o $(NAME) -Llibft -lft
+	@gcc $(SRCS) -o $(NAME) -Llibft -lft -I libft
 
 fclean:
 	@rm -f $(NAME)

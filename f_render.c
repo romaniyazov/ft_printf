@@ -6,15 +6,15 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 18:36:17 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/02 21:10:50 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 13:04:15 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		f_nbrlen(int nbr)
+size_t	f_nbrlen(long long nbr)
 {
-	int		cnt;
+	size_t	cnt;
 
 	cnt = 1;
 	while (nbr /= 10)
@@ -53,7 +53,7 @@ size_t	f_render(long double f, t_params *params)
 {
 	size_t			len;
 
-	len = f_nbrlen((int)f) + 1;
+	len = f_nbrlen((long long)f) + 1;
 	if ((params->sign && f >= 0) || params->space)
 	{
 		ft_putchar(params->sign && f >= 0 ? '+' : ' ');
