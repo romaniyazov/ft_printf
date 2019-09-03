@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/02 18:29:49 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 14:37:24 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ size_t	p_count_len(unsigned long long d, t_params *params)
 	if (params->width > len)
 		len += (int)params->width - len;
 	else
-		len += 2;	
+		len += 2;
 	return (len);
 }
 

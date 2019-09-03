@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 13:00:18 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 14:38:18 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	o_render_right(long long o, t_params *params)
 	}
 	else
 	{
-		while ((int)(params->width--) - (int)o_nbrlen(o) - params->alternate > 0)
+		while ((int)(params->width--) - (int)o_nbrlen(o) -
+														params->alternate > 0)
 			ft_putchar(' ');
 		if (params->alternate)
 			ft_putchar('0');

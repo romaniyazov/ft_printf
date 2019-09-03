@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:12:24 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/02 21:34:37 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 20:30:24 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_params(t_params *params)
 	params->prec = false;
 	params->zeros = false;
 	params->width = 0;
-	params->precision = 6;
+	params->precision = 0;
 	params->l = false;
 	params->lll = false;
 	params->h = false;
@@ -33,7 +33,7 @@ int		get_width(char *str)
 
 	while (*str < '1' || *str > '9')
 	{
-		if (strchr(CONVERSIONS, *str) || strchr(MODIFIERS, *str) || *str == '.')
+		if (ft_strchr(CONVERSIONS, *str) || ft_strchr(MODIFIERS, *str) || *str == '.')
 			return (0);
 		str++;
 	}
@@ -52,8 +52,8 @@ int		get_precision(char *str)
 
 	while (!(*str == '.'))
 	{
-		if (strchr(CONVERSIONS, *str) || strchr(MODIFIERS, *str))
-			return (6);
+		if (ft_strchr(CONVERSIONS, *str) || ft_strchr(MODIFIERS, *str))
+			return (0);
 		str++;
 	}
 	str++;
@@ -73,7 +73,6 @@ void	set_flags(char **fmt, t_params *params)
 	init_params(params);
 	params->width = get_width(*fmt);
 	params->precision = get_precision(*fmt);
-
 	while (!strchr(CONVERSIONS, **fmt))
 	{
 		if (**fmt == '-')
@@ -94,6 +93,4 @@ void	set_flags(char **fmt, t_params *params)
 			params->h = (**fmt)++ == 'h' ? 2 : 1;
 		(*fmt)++;
 	}
-	//printf("(%d %d %d)", params->l, params->h, params->lll);
-	//fflush(stdout);
 }

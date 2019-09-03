@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 12:59:42 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 17:49:56 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,17 @@ int						d_render(long long d, t_params *params);
 int						c_render(char c, t_params *params);
 int						s_render(char *s, t_params *params);
 int						o_render(long long d, t_params *params);
-int						x_render(long long d, t_params *params, t_bool upper);
+int						x_render(unsigned long long d, t_params *params,
+																t_bool upper);
 void					ft_putnbr_base(unsigned long long nbr, int base,
 																t_bool upper);
 int						p_render(unsigned long long d, t_params *params);
 int						u_render(unsigned long long u, t_params *params);
 size_t					f_render(long double f, t_params *params);
+int						handle_u(va_list ap, t_params *params);
+int						handle_d(va_list ap, t_params *params);
+int						handle_x(va_list ap, t_params *params, t_bool upper);
+int						handle_o(va_list ap, t_params *params);
+int						handle_f(va_list ap, t_params *params);
 
 #endif

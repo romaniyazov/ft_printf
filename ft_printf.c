@@ -6,12 +6,11 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 19:59:48 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 13:05:47 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 19:47:55 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int		ft_printf(const char *format, ...)
 {

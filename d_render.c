@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 12:31:36 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 20:27:41 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ void	d_render_right(long long d, t_params *params)
 			ft_putchar('-');
 		else if (params->sign)
 			ft_putchar('+');
+		while (params->precision-- > 0)
+		{
+			ft_putchar('0');
+			params->width--;
+		}
 		while ((int)(params->width--) - (int)d_nbrlen(d) - params->space > 0)
 			ft_putchar('0');
 		ft_putnbr(d >= 0 ? d : -d);

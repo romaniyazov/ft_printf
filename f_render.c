@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 18:36:17 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 13:04:15 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/03 17:35:39 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ size_t	f_render(long double f, t_params *params)
 {
 	size_t			len;
 
+	if (!params->precision)
+		params->precision = 6;
 	len = f_nbrlen((long long)f) + 1;
 	if ((params->sign && f >= 0) || params->space)
 	{
