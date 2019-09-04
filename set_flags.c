@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:12:24 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 15:32:44 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 21:07:19 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ void	set_flags(char **fmt, t_params *params)
 		if (**fmt == '0' && (*(*fmt - 1) > '9' || *(*fmt - 1) < '0'))
 			params->zeros = true;
 		if (**fmt == 'l')
-			params->l = (**fmt)++ == 'l' ? 2 : 1;
+			params->l = *(*fmt)++ == 'l' ? 2 : 1;
 		if (**fmt == 'L')
 			params->lll = true;
 		if (**fmt == 'h')
-			params->h = (**fmt)++ == 'h' ? 2 : 1;
+			params->h = *(*fmt)++ == 'h' ? 2 : 1;
 		(*fmt)++;
 	}
 }

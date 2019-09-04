@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 15:32:37 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 21:04:00 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,10 @@ int						handle_x(va_list ap, t_params *params, t_bool upper);
 int						handle_o(va_list ap, t_params *params);
 int						handle_f(va_list ap, t_params *params);
 int						perc_render(t_params *params);
+int						x_empty(size_t width);
+int						o_empty(t_params *params);
+size_t					d_nbrlen(long long nbr);
+void					d_render_zeros(long long d, t_params *params);
+int						d_render_short(short d);
 
 #endif

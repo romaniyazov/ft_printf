@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 18:07:34 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 20:10:42 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,12 @@ void	x_render_right(unsigned long long d, t_params *params, t_bool upper)
 	}
 }
 
-int		x_empty(size_t width)
-{
-	int		i;
-
-	i = 0;
-	while (i++ < (int)width)
-		ft_putchar(' ');
-	return (width);
-}
-
 int		x_render(unsigned long long d, t_params *params, t_bool upper)
 {
 	size_t	len;
 
 	if (params->prec && !params->precision && d == 0)
-		return(x_empty(params->width));
+		return (x_empty(params->width));
 	len = x_count_len(d, params);
 	if (params->left)
 		x_render_left(d, params, upper);

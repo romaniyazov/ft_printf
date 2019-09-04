@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   d_render_zeros.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/01 16:46:56 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 19:51:07 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/04 20:23:17 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/04 20:23:18 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "ft_printf.h"
 
-void	ft_putnbr_base(unsigned long long nbr, int base, t_bool upper)
+void	d_render_zeros(long long d, t_params *params)
 {
-	unsigned long long	tmp;
-	unsigned long long	div;
-
-	tmp = nbr;
-	div = 1;
-	while (tmp > (unsigned long long)(base - 1))
-	{
-		div *= base;
-		tmp /= base;
-	}
-	while (div > 0)
-	{
-		if (upper)
-			ft_putchar(BASE_CHARS_UPPER[nbr / div % base]);
-		else
-			ft_putchar(BASE_CHARS_LOWER[nbr / div % base]);
-		div /= base;
-	}
+	if (d < 0)
+		ft_putchar('-');
+	else if (params->sign)
+		ft_putchar('+');
+	while ((int)(params->width--) - (int)d_nbrlen(d) - params->space > 0)
+		ft_putchar('0');
+	ft_putnbr(d >= 0 ? d : -d);
 }

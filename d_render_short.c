@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   d_render_short.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/01 16:46:56 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 19:51:07 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/04 20:58:31 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/04 21:05:47 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "ft_printf.h"
 
-void	ft_putnbr_base(unsigned long long nbr, int base, t_bool upper)
+int		d_render_short(short d)
 {
-	unsigned long long	tmp;
-	unsigned long long	div;
+	short	tmp;
+	int		div;
+	int		len;
 
-	tmp = nbr;
+	printf("abc");
+	tmp = d;
 	div = 1;
-	while (tmp > (unsigned long long)(base - 1))
-	{
-		div *= base;
-		tmp /= base;
-	}
+	while(tmp / div > 10)
+		div *= 10;
+	len = 0;
 	while (div > 0)
 	{
-		if (upper)
-			ft_putchar(BASE_CHARS_UPPER[nbr / div % base]);
-		else
-			ft_putchar(BASE_CHARS_LOWER[nbr / div % base]);
-		div /= base;
+		ft_putchar(d / div % 10 + '0');
+		div /= 10;
+		len++;
 	}
+	return (len);
 }

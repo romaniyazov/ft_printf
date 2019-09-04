@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 18:42:35 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 20:13:54 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ size_t	o_count_len(long long o, t_params *params)
 		len += params->width - len;
 	if (params->precision > (int)params->width && params->width)
 		len += params->precision - params->width;
-	else if (params->precision > (int)o_nbrlen(o))
-		len += params->precision - (int)o_nbrlen(o);
+	else if (params->precision > (int)len)
+		len += params->precision - (int)len;
 	return (len);
 }
 
@@ -88,23 +88,12 @@ void	o_render_right(long long o, t_params *params)
 	}
 }
 
-int		o_empty(size_t width)
-{
-	int		i;
-
-	i = 0;
-	while (i++ < (int)width)
-		ft_putchar(' ');
-	return (width);
-}
-
-
 int		o_render(long long o, t_params *params)
 {
 	size_t	len;
 
 	if (params->prec && !params->precision && o == 0)
-		return(o_empty(params->width));
+		return (o_empty(params));
 	len = o_count_len(o, params);
 	if ((int)o_nbrlen(o) > params->precision)
 		params->precision = (int)o_nbrlen(o);

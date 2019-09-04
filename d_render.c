@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 18:08:56 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 20:23:33 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,7 @@ void	d_render_right(long long d, t_params *params)
 		params->width--;
 	if (params->zeros)
 	{
-		if (d < 0)
-			ft_putchar('-');
-		else if (params->sign)
-			ft_putchar('+');
-		while ((int)(params->width--) - (int)d_nbrlen(d) - params->space > 0)
-			ft_putchar('0');
-		ft_putnbr(d >= 0 ? d : -d);
+		d_render_zeros(d, params);
 	}
 	else
 	{
@@ -84,7 +78,7 @@ void	d_render_right(long long d, t_params *params)
 			ft_putchar(' ');
 		if (params->sign && d >= 0)
 			ft_putchar('+');
-		if (d < 0 && d > -9223372036854775807)
+		if (d < 0 && d >= -9223372036854775807)
 		{
 			d = -d;
 			ft_putchar('-');
@@ -95,22 +89,12 @@ void	d_render_right(long long d, t_params *params)
 	}
 }
 
-int		d_empty(size_t width)
-{
-	int		i;
-
-	i = 0;
-	while (i++ < (int)width)
-		ft_putchar(' ');
-	return (width);
-}
-
 int		d_render(long long d, t_params *params)
 {
 	int		len;
 
 	if (params->prec && !params->precision && d == 0)
-		return(d_empty(params->width));
+		return (x_empty(params->width));
 	if ((int)d_nbrlen(d) > params->precision)
 		params->precision = (int)d_nbrlen(d);
 	if (params->prec)

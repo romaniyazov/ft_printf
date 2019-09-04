@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 12:27:00 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 15:45:54 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 20:10:31 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	u_render_right(unsigned long long u, t_params *params)
 	{
 		while ((int)(params->width--) - params->precision > 0)
 			ft_putchar(' ');
-		while(params->precision-- - (int)u_nbrlen(u) > 0)
+		while (params->precision-- - (int)u_nbrlen(u) > 0)
 			ft_putchar('0');
 		ft_putnbr_base(u, 10, false);
 	}
@@ -75,7 +75,7 @@ int		u_render(unsigned long long u, t_params *params)
 	int		len;
 
 	len = u_count_len(u, params);
-	if(params->prec)
+	if (params->prec)
 		params->zeros = false;
 	if ((int)u_nbrlen(u) > params->precision)
 		params->precision = (int)u_nbrlen(u);
