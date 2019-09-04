@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:12:24 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 20:30:24 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 15:32:44 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int		get_width(char *str)
 
 	while (*str < '1' || *str > '9')
 	{
-		if (ft_strchr(CONVERSIONS, *str) || ft_strchr(MODIFIERS, *str) || *str == '.')
+		if (ft_strchr(CONVERSIONS, *str) || ft_strchr(MODIFIERS, *str) ||
+				*str == '.')
 			return (0);
 		str++;
 	}
@@ -46,7 +47,7 @@ int		get_width(char *str)
 	return (len);
 }
 
-int		get_precision(char *str)
+int		get_precision(char *str, t_params *params)
 {
 	int		len;
 
@@ -56,6 +57,7 @@ int		get_precision(char *str)
 			return (0);
 		str++;
 	}
+	params->prec = true;
 	str++;
 	if (*str == '0')
 		return (0);
@@ -71,9 +73,10 @@ int		get_precision(char *str)
 void	set_flags(char **fmt, t_params *params)
 {
 	init_params(params);
+	(*fmt)++;
 	params->width = get_width(*fmt);
-	params->precision = get_precision(*fmt);
-	while (!strchr(CONVERSIONS, **fmt))
+	params->precision = get_precision(*fmt, params);
+	while (!strchr(CONVERSIONS, **fmt) && **fmt != '%')
 	{
 		if (**fmt == '-')
 			params->left = true;

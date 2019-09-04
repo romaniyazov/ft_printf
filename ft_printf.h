@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 17:49:56 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 15:32:37 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define FLAGS "#0-+ ."
 # define MODIFIERS "hlL"
-# define CONVERSIONS "cspdiouxXf"
+# define CONVERSIONS "cspdiouxXf%"
 # define BASE_CHARS_UPPER "0123456789ABCDEF"
 # define BASE_CHARS_LOWER "0123456789abcdef"
 
@@ -44,7 +44,7 @@ int						ft_printf(const char *format, ...);
 int						parse(char **fmt, va_list ap, t_params *params);
 void					init_params(t_params *params);
 int						get_width(char *str);
-int						get_precision(char *str);
+int						get_precision(char *str, t_params *params);
 void					set_flags(char **fmt, t_params *params);
 int						d_render(long long d, t_params *params);
 int						c_render(char c, t_params *params);
@@ -62,5 +62,6 @@ int						handle_d(va_list ap, t_params *params);
 int						handle_x(va_list ap, t_params *params, t_bool upper);
 int						handle_o(va_list ap, t_params *params);
 int						handle_f(va_list ap, t_params *params);
+int						perc_render(t_params *params);
 
 #endif

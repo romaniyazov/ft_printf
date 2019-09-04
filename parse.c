@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:20:03 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 14:56:36 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 14:27:49 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 
 int		parse(char **fmt, va_list ap, t_params *params)
 {
-	if (*(*fmt + 1) == '%')
-	{
-		ft_putchar('%');
-		*fmt += 1;
-		return (1);
-	}
 	set_flags(fmt, params);
 	if (**fmt == 'd' || **fmt == 'i')
 		return (handle_d(ap, params));
@@ -37,5 +31,7 @@ int		parse(char **fmt, va_list ap, t_params *params)
 		return (handle_u(ap, params));
 	if (**fmt == 'f')
 		return (handle_f(ap, params));
+	if (**fmt == '%')
+		return (perc_render(params));
 	return (0);
 }

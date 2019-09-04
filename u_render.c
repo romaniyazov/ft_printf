@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 12:27:00 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/02 21:41:51 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 15:45:54 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int		u_count_len(unsigned long long u, t_params *params)
 		len++;
 	if (params->width > len)
 		len += params->width - len;
+	if (params->precision > (int)params->width && params->width)
+		len += params->precision - params->width;
+	if (params->precision > (int)len)
+		len += params->precision - (int)u_nbrlen(u);
 	return (len);
 }
 
@@ -58,8 +62,10 @@ void	u_render_right(unsigned long long u, t_params *params)
 	}
 	else
 	{
-		while ((int)(params->width--) - (int)u_nbrlen(u) > 0)
+		while ((int)(params->width--) - params->precision > 0)
 			ft_putchar(' ');
+		while(params->precision-- - (int)u_nbrlen(u) > 0)
+			ft_putchar('0');
 		ft_putnbr_base(u, 10, false);
 	}
 }
@@ -69,6 +75,10 @@ int		u_render(unsigned long long u, t_params *params)
 	int		len;
 
 	len = u_count_len(u, params);
+	if(params->prec)
+		params->zeros = false;
+	if ((int)u_nbrlen(u) > params->precision)
+		params->precision = (int)u_nbrlen(u);
 	if (params->left)
 		u_render_left(u, params);
 	else

@@ -6,7 +6,7 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/02 18:04:47 by adavis            #+#    #+#              #
-#    Updated: 2019/09/03 16:51:14 by adavis           ###   ########.fr        #
+#    Updated: 2019/09/04 14:32:08 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRC 	=	ft_printf.c \
 			p_render.c \
 			u_render.c \
 			f_render.c \
+			perc_render.c \
 			ft_putnbr_base.c
 OBJ		=	ft_printf.o \
 			parse.o \
@@ -37,6 +38,7 @@ OBJ		=	ft_printf.o \
 			p_render.o \
 			u_render.o \
 			f_render.o \
+			perc_render.o \
 			ft_putnbr_base.o
 
 $(NAME):

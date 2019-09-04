@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   perc_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/01 16:46:56 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 13:25:34 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/04 14:27:54 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/04 14:40:05 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ft_printf.h"
 
-void	ft_putnbr_base(unsigned long long nbr, int base, t_bool upper)
+int		perc_render(t_params *params)
 {
-	unsigned long long	tmp;
-	unsigned long long	div;
+	int		i;
 
-	tmp = nbr;
-	div = 1;
-	while (tmp > 9)
-	{
-		div *= base;
-		tmp /= base;
-	}
-	while (div > 0)
-	{
-		if (upper)
-			ft_putchar(BASE_CHARS_UPPER[nbr / div % base]);
-		else
-			ft_putchar(BASE_CHARS_LOWER[nbr / div % base]);
-		div /= base;
-	}
+	i = 1;
+	if (params -> left)
+		ft_putchar('%');
+	while (i++ < (int)params->width)
+		ft_putchar(' ');
+	if (!params->left)
+		ft_putchar('%');
+	if (params->width > 1)
+		return ((int)params->width);
+	return (1);
 }

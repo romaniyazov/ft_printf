@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 16:13:21 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 20:15:05 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 15:26:15 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		s_render(char *s, t_params *params)
 	int		len;
 	char	*str;
 
+	if (s == NULL)
+		s = ft_strdup("(null)");
 	if (params->precision > 0)
 	{
 		str = ft_strnew(params->precision);
@@ -31,6 +33,7 @@ int		s_render(char *s, t_params *params)
 		ft_putchar(' ');
 	if (!params->left)
 		ft_putstr(s);
-	ft_strdel(&str);
+	if (params->precision)
+		ft_strdel(&str);
 	return (len);
 }
