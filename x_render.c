@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 15:48:42 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 18:07:34 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	x_render_left(unsigned long long d, t_params *params, t_bool upper)
 		params->width -= 2;
 	if (params->width)
 	{
-		if (params->alternate)
+		if (params->alternate && d > 0)
 			ft_putstr(upper ? "0X" : "0x");
 		ft_putnbr_base(d, 16, upper);
 		while ((int)(params->width--) - (int)x_nbrlen(d) > 0)
@@ -70,7 +70,7 @@ void	x_render_right(unsigned long long d, t_params *params, t_bool upper)
 		while ((int)(params->width--) - (int)x_nbrlen(d) -
 													params->alternate * 2 > 0)
 			ft_putchar(' ');
-		if (params->alternate)
+		if (params->alternate && d > 0)
 			ft_putstr(upper ? "0X" : "0x");
 		ft_putnbr_base(d, 16, upper);
 	}

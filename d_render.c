@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 16:14:29 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/04 18:08:56 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ int		d_render(long long d, t_params *params)
 		return(d_empty(params->width));
 	if ((int)d_nbrlen(d) > params->precision)
 		params->precision = (int)d_nbrlen(d);
+	if (params->prec)
+		params->zeros = false;
 	len = d_count_len(d, params);
 	if (params->left)
 		d_render_left(d, params);
