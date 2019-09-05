@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 19:59:48 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 19:47:55 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 22:08:55 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ int		ft_printf(const char *format, ...)
 	va_list		ap;
 	t_params	params;
 	char		*fmt;
+	char		*ffmt;
 	int			len;
 
 	len = 0;
+	fmt = ft_strnew(ft_strlen(format) + 1);
+	ft_strcpy(fmt, format);
+	ffmt = fmt;
 	va_start(ap, format);
-	fmt = ft_strdup(format);
 	while (*fmt)
 	{
 		if (*fmt == '%')
@@ -34,5 +37,6 @@ int		ft_printf(const char *format, ...)
 		fmt++;
 	}
 	va_end(ap);
+	ft_strdel(&ffmt);
 	return (len);
 }

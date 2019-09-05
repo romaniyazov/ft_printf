@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 12:27:00 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 20:10:31 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 16:10:07 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ int		u_count_len(unsigned long long u, t_params *params)
 		len++;
 	if (params->width > len)
 		len += params->width - len;
-	if (params->precision > (int)params->width && params->width)
-		len += params->precision - params->width;
 	if (params->precision > (int)len)
-		len += params->precision - (int)u_nbrlen(u);
+		len = params->precision;
 	return (len);
 }
 
@@ -74,6 +72,8 @@ int		u_render(unsigned long long u, t_params *params)
 {
 	int		len;
 
+	if (params->prec && !params->precision && u == 0)
+		return (o_empty(params));
 	len = u_count_len(u, params);
 	if (params->prec)
 		params->zeros = false;

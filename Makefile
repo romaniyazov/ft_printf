@@ -6,7 +6,7 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/02 18:04:47 by adavis            #+#    #+#              #
-#    Updated: 2019/09/04 21:02:38 by adavis           ###   ########.fr        #
+#    Updated: 2019/09/05 21:47:19 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ SRC 	=	ft_printf.c \
 OBJ		=	$(SRC:%.c=%.o)
 
 $(NAME):
-	@cd libft && make
-	@gcc $(SRC) $(FLAGS) -c -Ilibft
+	@make -C libft
+	@gcc $(SRC) $(FLAGS) -c -Ilibft -g
 	@cp libft/libft.a libftprintf.a
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
@@ -42,11 +42,11 @@ $(NAME):
 all: $(NAME)
 
 clean:
-	@cd libft && make clean
+	@make -C libft $@
 	@rm -f $(OBJ)
 
 fclean: clean
-	@cd libft && make fclean
+	@make -C libft $@
 	@rm -f $(NAME)
 
 re: fclean all

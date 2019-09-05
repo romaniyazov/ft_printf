@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 14:37:24 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:52:40 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,21 @@ size_t	p_count_len(unsigned long long d, t_params *params)
 	len = 1;
 	while (tmp /= 16)
 		len++;
+	len += 2;
 	if (params->width > len)
-		len += (int)params->width - len;
-	else
-		len += 2;
+		len = (int)params->width;
+	if (params->precision + 2 > (int)len)
+		len = params->precision + 2;
 	return (len);
 }
 
 void	p_render_left(unsigned long long d, t_params *params)
 {
-	if (params->alternate)
-		params->width--;
 	if (params->width)
 	{
 		ft_putstr("0x");
 		ft_putnbr_base(d, 16, false);
-		while ((int)(params->width--) - p_nbrlen(d) > 0)
+		while ((int)(params->width--) - p_nbrlen(d) - 2 > 0)
 			ft_putchar(' ');
 	}
 	else
@@ -70,6 +69,8 @@ void	p_render_right(unsigned long long d, t_params *params)
 		while ((int)(params->width--) - p_nbrlen(d) - 2 > 0)
 			ft_putchar(' ');
 		ft_putstr("0x");
+		while (params->precision-- - p_nbrlen(d) > 0)
+			ft_putchar('0');
 		ft_putnbr_base(d, 16, false);
 	}
 }
@@ -78,6 +79,11 @@ int		p_render(unsigned long long d, t_params *params)
 {
 	size_t	len;
 
+	if (params->prec && !params->precision && d == 0)
+	{
+		ft_putstr("0x");
+		return (2);
+	}
 	len = p_count_len(d, params);
 	if (params->left)
 		p_render_left(d, params);

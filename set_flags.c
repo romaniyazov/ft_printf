@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:12:24 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 21:07:19 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:55:09 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,30 @@ int		get_precision(char *str, t_params *params)
 	return (len);
 }
 
+void	set_long_short(char **fmt, t_params *params)
+{
+	if (**fmt == 'l')
+	{
+		if (*(*fmt + 1) == 'l')
+		{
+			(*fmt)++;
+			params->l = 2;
+		}
+		else
+			params->l = 1;
+	}
+	if (**fmt == 'h')
+	{
+		if (*(*fmt + 1) == 'h')
+		{
+			(*fmt)++;
+			params->h = 2;
+		}
+		else
+			params->h = 1;
+	}
+}
+
 void	set_flags(char **fmt, t_params *params)
 {
 	init_params(params);
@@ -88,12 +112,9 @@ void	set_flags(char **fmt, t_params *params)
 			params->alternate = true;
 		if (**fmt == '0' && (*(*fmt - 1) > '9' || *(*fmt - 1) < '0'))
 			params->zeros = true;
-		if (**fmt == 'l')
-			params->l = *(*fmt)++ == 'l' ? 2 : 1;
 		if (**fmt == 'L')
 			params->lll = true;
-		if (**fmt == 'h')
-			params->h = *(*fmt)++ == 'h' ? 2 : 1;
+		set_long_short(fmt, params);
 		(*fmt)++;
 	}
 }

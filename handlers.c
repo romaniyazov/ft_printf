@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 14:35:39 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 21:17:25 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:29:36 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int		handle_u(va_list ap, t_params *params)
 {
 	if (params->l == 1)
-		return (u_render(va_arg(ap, unsigned long), params));
-	else if (params->l == 2)
 		return (u_render(va_arg(ap, unsigned long long), params));
+	else if (params->l == 2)
+		return (u_render(va_arg(ap, unsigned long), params));
 	else if (params->h == 1)
 		return
-		(u_render((unsigned short int)va_arg(ap, unsigned int), params));
+		(u_render((unsigned short)va_arg(ap, unsigned int), params));
 	else if (params->h == 2)
 		return (u_render((unsigned char)va_arg(ap, unsigned int), params));
 	else
@@ -30,9 +30,9 @@ int		handle_u(va_list ap, t_params *params)
 int		handle_d(va_list ap, t_params *params)
 {
 	if (params->l == 1)
-		return (d_render((long)va_arg(ap, unsigned int), params));
+		return (d_render(va_arg(ap, long), params));
 	else if (params->l == 2)
-		return (d_render((long)va_arg(ap, unsigned int), params));
+		return (d_render(va_arg(ap, long long), params));
 	else if (params->h == 1)
 		return (d_render((short)va_arg(ap, int), params));
 	else if (params->h == 2)
@@ -48,7 +48,7 @@ int		handle_x(va_list ap, t_params *params, t_bool upper)
 	else if (params->l == 2)
 		return (x_render(va_arg(ap, unsigned long long), params, upper));
 	else if (params->h == 1)
-		return (x_render((unsigned short int)va_arg(ap, unsigned int), params,
+		return (x_render((unsigned short)va_arg(ap, unsigned int), params,
 			upper));
 	else if (params->h == 2)
 		return (x_render((unsigned char)va_arg(ap, unsigned int), params,
@@ -60,13 +60,13 @@ int		handle_x(va_list ap, t_params *params, t_bool upper)
 int		handle_o(va_list ap, t_params *params)
 {
 	if (params->l == 1)
-		return (o_render(va_arg(ap, unsigned long), params));
+		return (o_render(va_arg(ap, long), params));
 	else if (params->l == 2)
-		return (o_render(va_arg(ap, unsigned long long), params));
+		return (o_render(va_arg(ap, long long), params));
 	else if (params->h == 1)
-		return (o_render((short)va_arg(ap, int), params));
+		return (o_render((unsigned short)va_arg(ap, int), params));
 	else if (params->h == 2)
-		return (o_render((char)va_arg(ap, int), params));
+		return (o_render((unsigned char)va_arg(ap, int), params));
 	else
 		return (o_render(va_arg(ap, unsigned int), params));
 }

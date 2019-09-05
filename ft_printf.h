@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/29 14:51:45 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 21:04:00 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 14:31:00 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "libft.h"
 
 # define FLAGS "#0-+ ."
-# define MODIFIERS "hlL"
+# define MODIFIERS "hhllL"
 # define CONVERSIONS "cspdiouxXf%"
 # define BASE_CHARS_UPPER "0123456789ABCDEF"
 # define BASE_CHARS_LOWER "0123456789abcdef"
@@ -49,7 +49,7 @@ void					set_flags(char **fmt, t_params *params);
 int						d_render(long long d, t_params *params);
 int						c_render(char c, t_params *params);
 int						s_render(char *s, t_params *params);
-int						o_render(long long d, t_params *params);
+int						o_render(unsigned long long d, t_params *params);
 int						x_render(unsigned long long d, t_params *params,
 																t_bool upper);
 void					ft_putnbr_base(unsigned long long nbr, int base,

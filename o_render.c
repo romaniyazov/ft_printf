@@ -6,13 +6,13 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 20:13:54 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:53:13 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	o_nbrlen(long long nbr)
+size_t	o_nbrlen(unsigned long long nbr)
 {
 	size_t		cnt;
 
@@ -22,10 +22,10 @@ size_t	o_nbrlen(long long nbr)
 	return (cnt);
 }
 
-size_t	o_count_len(long long o, t_params *params)
+size_t	o_count_len(unsigned long long o, t_params *params)
 {
-	size_t		len;
-	long long	tmp;
+	size_t				len;
+	unsigned long long	tmp;
 
 	tmp = o;
 	len = 1;
@@ -35,14 +35,12 @@ size_t	o_count_len(long long o, t_params *params)
 		len++;
 	if (params->width > len)
 		len += params->width - len;
-	if (params->precision > (int)params->width && params->width)
-		len += params->precision - params->width;
-	else if (params->precision > (int)len)
-		len += params->precision - (int)len;
+	if (params->precision > (int)len - (params->alternate) && o > 0)
+		len = params->precision;
 	return (len);
 }
 
-void	o_render_left(long long o, t_params *params)
+void	o_render_left(unsigned long long o, t_params *params)
 {
 	int		i;
 
@@ -50,7 +48,7 @@ void	o_render_left(long long o, t_params *params)
 		params->width--;
 	if (params->width)
 	{
-		if (params->alternate)
+		if (params->alternate & !params->prec)
 			ft_putchar('0');
 		i = 0;
 		while (i++ < params->precision - (int)o_nbrlen(o) > 0)
@@ -67,7 +65,7 @@ void	o_render_left(long long o, t_params *params)
 	}
 }
 
-void	o_render_right(long long o, t_params *params)
+void	o_render_right(unsigned long long o, t_params *params)
 {
 	if (params->zeros)
 	{
@@ -77,10 +75,11 @@ void	o_render_right(long long o, t_params *params)
 	}
 	else
 	{
-		while ((int)(params->width--) - (int)o_nbrlen(o) -
+		while ((int)(params->width--) - params->precision -
 														params->alternate > 0)
 			ft_putchar(' ');
-		if (params->alternate)
+		if (params->alternate && o > 0 &&
+				(params->precision == (int)o_nbrlen(o) || !params->prec))
 			ft_putchar('0');
 		while ((int)params->precision-- - (int)o_nbrlen(o) > 0)
 			ft_putchar('0');
@@ -88,7 +87,7 @@ void	o_render_right(long long o, t_params *params)
 	}
 }
 
-int		o_render(long long o, t_params *params)
+int		o_render(unsigned long long o, t_params *params)
 {
 	size_t	len;
 
@@ -97,11 +96,6 @@ int		o_render(long long o, t_params *params)
 	len = o_count_len(o, params);
 	if ((int)o_nbrlen(o) > params->precision)
 		params->precision = (int)o_nbrlen(o);
-	if (o < 0)
-	{
-		ft_putchar('1');
-		len += 1;
-	}
 	if (params->left)
 		o_render_left(o, params);
 	else

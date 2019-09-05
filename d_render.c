@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 20:23:33 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 15:45:19 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ int		d_count_len(long long d, t_params *params)
 	len = d_nbrlen(d);
 	if (d < 0 || params->sign || params->space)
 		len++;
-	if (params->width > len)
+	if (params->width > len && (int)params->width > params->precision)
 		len += params->width - len;
-	if (params->precision > (int)params->width && params->width)
-		len += params->precision - params->width;
 	if (params->precision > (int)len)
 		len += params->precision - (int)d_nbrlen(d);
 	return (len);

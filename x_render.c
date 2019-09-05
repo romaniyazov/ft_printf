@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:47:32 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 20:10:42 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:45:05 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ size_t	x_count_len(unsigned long long d, t_params *params)
 		len += 2;
 	if ((int)params->width > (int)len)
 		len += params->width - len;
+	if (params->precision > (int)len - (params->alternate * 2) && d > 0)
+		len = params->precision + params->alternate * 2;
 	return (len);
 }
 
@@ -67,11 +69,13 @@ void	x_render_right(unsigned long long d, t_params *params, t_bool upper)
 	}
 	else
 	{
-		while ((int)(params->width--) - (int)x_nbrlen(d) -
+		while ((int)(params->width--) - params->precision -
 													params->alternate * 2 > 0)
 			ft_putchar(' ');
 		if (params->alternate && d > 0)
 			ft_putstr(upper ? "0X" : "0x");
+		while (params->precision-- - (int)x_nbrlen(d) > 0)
+			ft_putchar('0');
 		ft_putnbr_base(d, 16, upper);
 	}
 }
@@ -83,6 +87,8 @@ int		x_render(unsigned long long d, t_params *params, t_bool upper)
 	if (params->prec && !params->precision && d == 0)
 		return (x_empty(params->width));
 	len = x_count_len(d, params);
+	if ((int)x_nbrlen(d) > params->precision)
+		params->precision = (int)x_nbrlen(d);
 	if (params->left)
 		x_render_left(d, params, upper);
 	else
