@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 20:12:24 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/05 18:55:09 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/06 12:37:53 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	set_flags(char **fmt, t_params *params)
 	(*fmt)++;
 	params->width = get_width(*fmt);
 	params->precision = get_precision(*fmt, params);
-	while (!strchr(CONVERSIONS, **fmt) && **fmt != '%')
+	while (!strchr(CONVERSIONS, **fmt) && **fmt != '%' && **fmt != '*')
 	{
 		if (**fmt == '-')
 			params->left = true;

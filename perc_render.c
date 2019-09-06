@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:27:54 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/04 20:14:46 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/06 12:20:45 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		perc_render(t_params *params)
 	if (params->left)
 		ft_putchar('%');
 	while (i++ < (int)params->width)
-		ft_putchar(' ');
+		ft_putchar(params->zeros && !params->left ? '0' : ' ');
 	if (!params->left)
 		ft_putchar('%');
 	if (params->width > 1)
