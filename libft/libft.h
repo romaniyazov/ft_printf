@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 18:15:19 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/03 12:32:24 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/06 19:12:36 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <string.h>
 # include <libc.h>
+# include "get_next_line.h"
+# include "ft_printf.h"
 
 typedef struct		s_list
 {

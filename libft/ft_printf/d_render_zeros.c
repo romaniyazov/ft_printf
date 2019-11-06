@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   d_render_zeros.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 22:34:15 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/15 19:28:29 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/04 20:23:17 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/04 20:23:18 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	d_render_zeros(long long d, t_params *params)
 {
-	unsigned char	*dst_chr;
-	unsigned char	*src_chr;
-	size_t			len_tmp;
-
-	if (dst == src)
-		return (dst);
-	len_tmp = len;
-	dst_chr = (unsigned char *)dst;
-	src_chr = (unsigned char *)src;
-	if (src > dst)
-		return (ft_memcpy(dst, (void *)src, len));
-	while (len--)
-		dst_chr[len] = src_chr[len];
-	return (dst);
+	if (d < 0)
+		ft_putchar('-');
+	else if (params->sign)
+		ft_putchar('+');
+	while ((int)(params->width--) - (int)d_nbrlen(d) - params->space > 0)
+		ft_putchar('0');
+	ft_putnbr(d >= 0 ? d : -d);
 }

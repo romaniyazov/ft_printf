@@ -6,12 +6,13 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 13:37:06 by adavis            #+#    #+#              #
-#    Updated: 2019/06/05 22:21:32 by adavis           ###   ########.fr        #
+#    Updated: 2019/11/06 15:17:56 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libft.a
-FLAGS		=	-Wall -Werror -Wextra -c
+CC			=	gcc
+CFLAGS		=	-Wall -Werror -Wextra
 SRC			=	ft_memset.c \
 				ft_bzero.c \
 				ft_memcpy.c \
@@ -78,20 +79,27 @@ SRC			=	ft_memset.c \
 				ft_lstmap.c \
 				ft_abs.c \
 				ft_sqrt.c \
-				ft_strcap.c
+				ft_strcap.c \
+				get_next_line.c
 OBJ			=	$(SRC:%.c=%.o)
-
-$(NAME):
-	@gcc $(FLAGS) $(SRC)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
 
 all: $(NAME)
 
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
+	make -C ft_printf
+	rm -f libft.a
+	mv ft_printf/libft.a .
+	ranlib $(NAME)
+
+%.o: %.c %.h
+
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
+	make -C ft_printf $@
 
 fclean: clean
-	@rm -f $(NAME)
+	rm -f $(NAME)
+	make -C ft_printf $@
 
 re: fclean all

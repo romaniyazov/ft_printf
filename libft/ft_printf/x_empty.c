@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   x_empty.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 22:34:15 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/15 19:28:29 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/04 20:07:40 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/04 20:08:08 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int		x_empty(size_t width)
 {
-	unsigned char	*dst_chr;
-	unsigned char	*src_chr;
-	size_t			len_tmp;
+	int		i;
 
-	if (dst == src)
-		return (dst);
-	len_tmp = len;
-	dst_chr = (unsigned char *)dst;
-	src_chr = (unsigned char *)src;
-	if (src > dst)
-		return (ft_memcpy(dst, (void *)src, len));
-	while (len--)
-		dst_chr[len] = src_chr[len];
-	return (dst);
+	i = 0;
+	while (i++ < (int)width)
+		ft_putchar(' ');
+	return (width);
 }

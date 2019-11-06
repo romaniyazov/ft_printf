@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   c_render.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 22:34:15 by adavis            #+#    #+#             */
-/*   Updated: 2019/09/15 19:28:29 by adavis           ###   ########.fr       */
+/*   Created: 2019/09/01 15:05:12 by adavis            #+#    #+#             */
+/*   Updated: 2019/09/05 21:43:30 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int		c_render(char c, t_params *params)
 {
-	unsigned char	*dst_chr;
-	unsigned char	*src_chr;
-	size_t			len_tmp;
+	size_t	len;
 
-	if (dst == src)
-		return (dst);
-	len_tmp = len;
-	dst_chr = (unsigned char *)dst;
-	src_chr = (unsigned char *)src;
-	if (src > dst)
-		return (ft_memcpy(dst, (void *)src, len));
-	while (len--)
-		dst_chr[len] = src_chr[len];
-	return (dst);
+	len = 1;
+	if (params->left)
+		ft_putchar(c);
+	params->width--;
+	while ((int)params->width-- > 0)
+	{
+		ft_putchar(' ');
+		len++;
+	}
+	if (!params->left)
+		ft_putchar(c);
+	return (len);
 }

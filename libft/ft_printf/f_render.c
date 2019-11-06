@@ -6,7 +6,7 @@
 /*   By: adavis <adavis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 18:36:17 by adavis            #+#    #+#             */
-/*   Updated: 2019/11/06 15:14:03 by adavis           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:26:18 by adavis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,13 @@ size_t	f_after(long double f, t_params *params)
 	while (params->precision--)
 	{
 		c = (long)(f * mltp) % 10;
-		if (c < 0)
-			c = 1;
+		if ((long)(f * mltp * 10) % 10 == 9)
+		{
+			if (c == 9)
+				c = 0;
+			else
+				c += 1;
+		}
 		ft_putchar(c + '0');
 		len++;
 		mltp *= 10;
