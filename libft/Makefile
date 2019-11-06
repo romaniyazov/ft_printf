@@ -6,7 +6,7 @@
 #    By: adavis <adavis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 13:37:06 by adavis            #+#    #+#              #
-#    Updated: 2019/11/06 15:17:56 by adavis           ###   ########.fr        #
+#    Updated: 2019/11/06 15:42:02 by adavis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,19 +87,14 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
-	make -C ft_printf
-	rm -f libft.a
-	mv ft_printf/libft.a .
 	ranlib $(NAME)
 
 %.o: %.c %.h
 
 clean:
 	rm -f $(OBJ)
-	make -C ft_printf $@
 
 fclean: clean
 	rm -f $(NAME)
-	make -C ft_printf $@
 
 re: fclean all
